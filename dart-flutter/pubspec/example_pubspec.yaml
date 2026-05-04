@@ -1,0 +1,364 @@
+# =============================================================================
+# PUBSPEC.YAML — Annotated Example for a Flutter Application
+# =============================================================================
+# This file is the manifest for your Dart/Flutter project. It is read by the
+# `pub` package manager (bundled with the Dart SDK). Every field here affects
+# how your project is built, distributed, and how dependencies are resolved.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# PACKAGE IDENTITY
+# -----------------------------------------------------------------------------
+
+# The name of your package. Rules:
+#   - Must be lowercase with underscores (snake_case)
+#   - No hyphens, no spaces, no uppercase
+#   - Must be unique on pub.dev if you intend to publish
+#   - Used as the prefix in import paths: `package:travel_app/...`
+name: travel_app
+
+# Human-readable description of the package.
+#   - For pub.dev publishing: must be 60–180 characters
+#   - For apps: can be anything, but keep it meaningful for your team
+#   - The `>-` YAML block scalar folds the lines into a single space-separated string
+description: >-
+  A cross-platform Flutter travel companion app for discovering
+  destinations, booking trips, and sharing travel memories.
+
+# The version of your application.
+# Format: MAJOR.MINOR.PATCH+BUILD_NUMBER
+#   - MAJOR: breaking changes
+#   - MINOR: new features, backwards compatible
+#   - PATCH: bug fixes
+#   - BUILD_NUMBER (after `+`): the build number used by app stores
+#     → Android: versionCode in build.gradle
+#     → iOS: CFBundleVersion in Info.plist
+# Flutter reads this via: flutter build apk --build-name=1.2.3 --build-number=45
+# You can also let pubspec drive it: `flutter build apk` uses this version field.
+version: 1.2.3+45
+
+# For private apps not published to pub.dev, prevent accidental publishing.
+# `dart pub publish` will refuse to run when this is set to `none`.
+# Remove this line only if you're building a publishable library/plugin.
+publish_to: none
+
+# Links shown on pub.dev and in the Flutter/Dart tooling (for libraries).
+# Not strictly needed for private apps, but good documentation practice.
+homepage: https://example.com/travel-app
+repository: https://github.com/myorg/travel-app
+
+# -----------------------------------------------------------------------------
+# SDK ENVIRONMENT CONSTRAINTS
+# -----------------------------------------------------------------------------
+
+environment:
+  # The Dart SDK constraint. This is critically important:
+  #   - Lower bound (`>=3.3.0`): ensures users have the Dart features you rely on
+  #     (e.g., records, patterns, class modifiers introduced in Dart 3.0)
+  #   - Upper bound (`<4.0.0`): signals you haven't tested against Dart 4.x yet
+  #
+  # Check your current Dart SDK: `dart --version`
+  # Check available versions: https://dart.dev/get-dart/archive
+  sdk: '>=3.3.0 <4.0.0'
+
+  # Optional Flutter SDK constraint. Useful when you depend on Flutter APIs
+  # that were added in a specific Flutter version. Flutter manages its own
+  # bundled Dart SDK, so this is mostly for Flutter-specific widget/API guarantees.
+  flutter: '>=3.19.0'
+
+# -----------------------------------------------------------------------------
+# RUNTIME DEPENDENCIES
+# -----------------------------------------------------------------------------
+# Packages listed here are bundled into your compiled app. Every user of your
+# app (or library) will transitively need these packages resolved.
+
+dependencies:
+  # The Flutter SDK itself. Required for all Flutter apps.
+  # `sdk: flutter` is a special source — it comes from your Flutter installation,
+  # not from pub.dev. This gives you access to the `flutter/material.dart`,
+  # `flutter/widgets.dart`, etc. framework libraries.
+  flutter:
+    sdk: flutter
+
+  # -------------------------------------------------------------------------
+  # NAVIGATION
+  # -------------------------------------------------------------------------
+
+  # go_router: Declarative routing for Flutter based on the Router API.
+  # The `^` (caret) means: >=13.0.0 <14.0.0
+  # It allows MINOR and PATCH upgrades but not MAJOR (which would be breaking).
+  # This is the standard constraint for most packages.
+  go_router: ^13.2.0
+
+  # -------------------------------------------------------------------------
+  # STATE MANAGEMENT
+  # -------------------------------------------------------------------------
+
+  # flutter_riverpod: The Riverpod state management library for Flutter.
+  # Riverpod provides compile-time safe providers, unlike the older Provider package.
+  # We're using the Flutter-specific variant (flutter_riverpod), not `riverpod`
+  # (which is framework-agnostic).
+  flutter_riverpod: ^2.5.1
+
+  # riverpod_annotation: Provides @riverpod annotations for code generation.
+  # Required when using the code-gen style of Riverpod (recommended in Riverpod 2.x).
+  # The generated code lives in `*.g.dart` files created by build_runner.
+  riverpod_annotation: ^2.3.5
+
+  # -------------------------------------------------------------------------
+  # NETWORK & DATA
+  # -------------------------------------------------------------------------
+
+  # dio: A powerful HTTP client with interceptors, request cancellation,
+  # FormData, timeout config, etc. More featureful than the built-in `http` package.
+  dio: ^5.4.3
+
+  # freezed_annotation: Provides @freezed annotation for immutable data classes.
+  # Code is generated by `freezed` in dev_dependencies. Only the annotation
+  # package is a runtime dependency; the generator itself is dev-only.
+  freezed_annotation: ^2.4.1
+
+  # json_annotation: Provides @JsonSerializable for JSON serialization.
+  # Generated code from `json_serializable` in dev_dependencies.
+  json_annotation: ^4.8.1
+
+  # -------------------------------------------------------------------------
+  # LOCAL STORAGE
+  # -------------------------------------------------------------------------
+
+  # shared_preferences: Persistent key-value storage. Uses NSUserDefaults on iOS,
+  # SharedPreferences on Android. Suitable for small config values and user prefs.
+  # Do NOT use for sensitive data — use flutter_secure_storage for that.
+  shared_preferences: ^2.2.3
+
+  # flutter_secure_storage: AES-encrypted key-value storage.
+  # Uses the Keychain on iOS and Android Keystore on Android.
+  # Use for auth tokens, user credentials, API keys.
+  flutter_secure_storage: ^9.0.0
+
+  # -------------------------------------------------------------------------
+  # UI & THEMING
+  # -------------------------------------------------------------------------
+
+  # google_fonts: Load Google Fonts at runtime or include them as assets.
+  # In release mode, fonts are loaded from the network and cached locally.
+  # You can also bundle fonts as assets to avoid network dependency.
+  google_fonts: ^6.2.1
+
+  # flutter_svg: Renders SVG files as Flutter widgets.
+  # Note: performance-heavy SVGs can cause jank; prefer rasterized images in lists.
+  flutter_svg: ^2.0.10+1
+
+  # cached_network_image: Network image loading with disk/memory caching.
+  # Displays a placeholder while loading and handles errors gracefully.
+  cached_network_image: ^3.3.1
+
+  # -------------------------------------------------------------------------
+  # UTILITIES
+  # -------------------------------------------------------------------------
+
+  # intl: Internationalization and localization: date formatting, number formatting,
+  # plural/gender rules. Required if using Flutter's gen-l10n localization system.
+  intl: ^0.19.0
+
+  # url_launcher: Launch URLs in the browser, email client, phone dialer, etc.
+  # Requires platform configuration (Info.plist on iOS, queries on Android).
+  url_launcher: ^6.3.0
+
+  # package_info_plus: Read the app's version, build number, and package name
+  # at runtime. Useful for displaying version info in settings screens.
+  package_info_plus: ^8.0.0
+
+  # -------------------------------------------------------------------------
+  # GIT DEPENDENCY EXAMPLE
+  # -------------------------------------------------------------------------
+  # Use a git dependency when the package isn't published to pub.dev,
+  # or when you need an unreleased fix. The `ref` can be a branch, tag, or
+  # commit SHA. A commit SHA is the most stable (won't change).
+  #
+  # my_internal_sdk:
+  #   git:
+  #     url: https://github.com/myorg/internal-sdk.git
+  #     ref: v2.1.0              # or a specific commit SHA for reproducibility
+  #     path: packages/sdk_dart  # subdirectory inside the repo (monorepo pattern)
+
+  # -------------------------------------------------------------------------
+  # PATH DEPENDENCY EXAMPLE
+  # -------------------------------------------------------------------------
+  # Use path dependencies when the package lives locally, e.g., in a monorepo.
+  # Changes to the local package are immediately visible without re-running pub get.
+  # Path dependencies CANNOT be published to pub.dev — remove before publishing.
+  #
+  # design_system:
+  #   path: ../design_system   # relative path from THIS pubspec.yaml
+
+# -----------------------------------------------------------------------------
+# DEVELOPMENT DEPENDENCIES
+# -----------------------------------------------------------------------------
+# These are NOT compiled into your app. They're only used during development:
+# code generation, testing, linting, mocking, etc.
+# When someone depends on your library, they do NOT get these transitively.
+
+dev_dependencies:
+  # Flutter's testing framework. Provides `testWidgets`, `WidgetTester`,
+  # `pumpWidget`, etc. Built on the `test` package from the Dart SDK.
+  # The `sdk: flutter` source means it comes from your Flutter installation.
+  flutter_test:
+    sdk: flutter
+
+  # flutter_lints: The official recommended lint rules for Flutter projects.
+  # Configures analysis_options.yaml with a curated set of `dart analyze` rules.
+  # These are warnings/errors shown in your IDE and in `dart analyze` output.
+  flutter_lints: ^4.0.0
+
+  # -------------------------------------------------------------------------
+  # CODE GENERATION
+  # -------------------------------------------------------------------------
+
+  # build_runner: The build system for Dart code generation. Run with:
+  #   dart run build_runner build            (one-time build)
+  #   dart run build_runner watch            (watch mode during development)
+  #   dart run build_runner build --delete-conflicting-outputs  (clean build)
+  # Never add this to `dependencies` — it's purely a dev tool.
+  build_runner: ^2.4.9
+
+  # freezed: Code generator for immutable data classes. Generates:
+  #   - copyWith() methods
+  #   - == and hashCode
+  #   - toString()
+  #   - Sealed class hierarchies (union types)
+  # Source file: my_model.dart → Generated: my_model.freezed.dart
+  # Only the generator is here; `freezed_annotation` (runtime) is in `dependencies`.
+  freezed: ^2.4.7
+
+  # json_serializable: Generates fromJson/toJson for classes annotated with
+  # @JsonSerializable. Source: my_model.dart → Generated: my_model.g.dart
+  # Works together with json_annotation (which is in `dependencies`).
+  json_serializable: ^6.7.6
+
+  # riverpod_generator: Generates provider boilerplate from @riverpod annotations.
+  # Source: my_provider.dart → Generated: my_provider.g.dart
+  riverpod_generator: ^2.4.0
+
+  # custom_lint: Enables Riverpod Lint and other annotation-based lint rules.
+  # Run as part of `dart analyze` when configured in analysis_options.yaml.
+  custom_lint: ^0.6.4
+  riverpod_lint: ^2.3.10
+
+  # -------------------------------------------------------------------------
+  # TESTING UTILITIES
+  # -------------------------------------------------------------------------
+
+  # mocktail: Null-safe mocking library. Alternative to mockito that doesn't
+  # require code generation — you create mock classes by extending Mock directly.
+  mocktail: ^1.0.4
+
+  # integration_test: Flutter's integration testing framework. Runs tests on
+  # actual devices or emulators. Uses `sdk: flutter` like flutter_test.
+  integration_test:
+    sdk: flutter
+
+# -----------------------------------------------------------------------------
+# DEPENDENCY OVERRIDES
+# -----------------------------------------------------------------------------
+# Forces a specific version of a package regardless of what any dependency
+# in the graph requires. Use sparingly — this bypasses safety checks.
+#
+# Example use case: package A requires http ^0.13.0, package B requires
+# http ^1.0.0. They conflict. If you know http 1.2.0 is actually compatible
+# with package A's usage, you can force it:
+#
+# dependency_overrides:
+#   http: ^1.2.0
+#
+# Another use case: testing against a pre-release before an upstream package
+# has updated its constraint:
+#
+# dependency_overrides:
+#   some_package: 3.0.0-beta.1
+
+# -----------------------------------------------------------------------------
+# FLUTTER-SPECIFIC CONFIGURATION
+# -----------------------------------------------------------------------------
+
+flutter:
+  # Must be true to use Material Design icons (the Icons.xxx constants).
+  # This bundles the MaterialIcons font file (~1MB) into your app.
+  # Set to false only if you're building a purely Cupertino or custom app.
+  uses-material-design: true
+
+  # --------------------------------------------------------------------------
+  # ASSETS
+  # --------------------------------------------------------------------------
+  # Files listed here are bundled into the app's asset bundle at build time.
+  # Access them at runtime via: AssetImage('assets/images/logo.png')
+  # or: rootBundle.loadString('assets/data/config.json')
+  #
+  # IMPORTANT: Trailing slash means "include all files in this directory"
+  # but does NOT include subdirectories. Each nested directory must be listed.
+  #
+  # After adding new assets: run `flutter pub get` to update the asset manifest.
+  assets:
+    # Image assets
+    - assets/images/                     # All files directly inside this dir
+    - assets/images/destinations/        # Subdirectory — must be listed separately
+    - assets/images/avatars/
+
+    # Data files
+    - assets/data/countries.json         # Specific file
+    - assets/data/categories.json
+
+    # Vector graphics
+    - assets/icons/                      # SVG icons used with flutter_svg
+
+    # Other
+    - assets/animations/                 # Lottie JSON animation files
+
+  # --------------------------------------------------------------------------
+  # FONTS
+  # --------------------------------------------------------------------------
+  # Custom fonts bundled with the app. Each `family` defines a font family name
+  # that you reference in code: TextStyle(fontFamily: 'Poppins')
+  #
+  # The `weight` corresponds to FontWeight values:
+  #   100=thin, 200=extraLight, 300=light, 400=regular, 500=medium,
+  #   600=semiBold, 700=bold, 800=extraBold, 900=black
+  #
+  # The `style` is either `normal` (default) or `italic`.
+  fonts:
+    # Primary body/UI font
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+          # weight and style are optional; default is 400, normal
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Poppins-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Poppins-BoldItalic.ttf
+          weight: 700
+          style: italic
+
+    # Monospace font for code/technical display
+    - family: JetBrainsMono
+      fonts:
+        - asset: assets/fonts/JetBrainsMono-Regular.ttf
+        - asset: assets/fonts/JetBrainsMono-Bold.ttf
+          weight: 700
+
+  # --------------------------------------------------------------------------
+  # DEFERRED COMPONENTS (Advanced — Android only)
+  # --------------------------------------------------------------------------
+  # Allows splitting app into installable modules (Android App Bundles / dynamic delivery).
+  # Users download the base app and additional components are downloaded on demand.
+  #
+  # deferred-components:
+  #   - name: maps_module
+  #     libraries:
+  #       - package:travel_app/src/features/maps/maps_module.dart
+  #     assets:
+  #       - assets/maps/
